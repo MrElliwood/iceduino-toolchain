@@ -1,0 +1,5 @@
+Die Hardware-Toolchain setzt sich zusammen aus:
+
+
+Eine funktiuonsfähige Entwicklungsumgebung lässt sich durch die folgenden Schritte reproduzieren:
+
