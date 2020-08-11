@@ -1,0 +1,54 @@
+
+#clk
+set_io clk_12mhz 21
+
+
+#Output level shifter tri-state pins
+set_io oe0 39
+set_io oe1 34
+
+#SRAM
+
+
+#uart to FTDI
+#set_io uart_rx 60
+#set_io uart_tx 62
+set_io uart_rt 61
+
+#uart to Header
+set_io uart_rx 32
+set_io uart_tx 33
+
+
+#spi
+set_io spi_mosi 67
+set_io spi_miso 68
+set_io spi_clk 70
+set_io spi_ss 71
+
+#Timer
+
+
+#Buttons
+set_io btn4 129
+set_io btn3 128
+set_io btn2 125
+set_io btn1 124
+set_io btn0 122
+
+
+#Switches
+#set_io sw0 130
+#set_io sw1 134
+
+
+#leds
+set_io led0 112
+set_io led1 113
+set_io led2 114
+set_io led3 115
+set_io led4 116
+set_io led5 117
+set_io led6 118
+set_io led7 119
+
