@@ -1,0 +1,26 @@
+
+button.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	0140006f          	j	14 <_init>
+	...
+
+00000010 <_interrupt>:
+  10:	0000006f          	j	10 <_interrupt>
+
+00000014 <_init>:
+  14:	00080137          	lui	sp,0x80
+  18:	008000ef          	jal	ra,20 <main>
+  1c:	fe5ff06f          	j	0 <_start>
+
+Disassembly of section .text.startup:
+
+00000020 <main>:
+  20:	fe004783          	lbu	a5,-32(zero) # ffffffe0 <//.+0xfff7ffe0>
+  24:	fe004783          	lbu	a5,-32(zero) # ffffffe0 <//.+0xfff7ffe0>
+  28:	0ff7f793          	andi	a5,a5,255
+  2c:	fef00823          	sb	a5,-16(zero) # fffffff0 <//.+0xfff7fff0>
+  30:	ff5ff06f          	j	24 <main+0x4>
