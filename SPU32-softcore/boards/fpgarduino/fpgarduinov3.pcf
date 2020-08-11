@@ -1,0 +1,146 @@
+
+#clk
+set_io clk_12mhz 21
+
+#uart
+set_io uart_rx 60
+set_io uart_tx 62
+set_io uart_rt 61
+
+#spi
+set_io spi_mosi 67
+set_io spi_miso 68
+set_io spi_clk 70
+set_io spi_ss 71
+
+#leds
+set_io led0 112
+set_io led1 113
+set_io led2 114
+set_io led3 115
+set_io led4 116
+set_io led5 117
+set_io led6 118
+set_io led7 119
+
+#sram
+set_io sram_ce 110
+set_io sram_oe 87
+set_io sram_we 94
+
+set_io a0 73
+set_io a1 74
+set_io a2 75
+set_io a3 76
+set_io a4 78
+set_io a5 102
+set_io a6 104
+set_io a7 105
+set_io a8 106
+set_io a9 107
+set_io a10 101
+set_io a11 99
+set_io a12 98
+set_io a13 97
+set_io a14 96
+set_io a15 85
+set_io a16 83
+set_io a17 81
+set_io a18 79
+
+set_io io0 80
+set_io io1 82
+set_io io2 84
+set_io io3 91
+set_io io4 95
+set_io io5 93
+set_io io6 90
+set_io io7 88
+
+
+#not used in spu32
+
+#set_io clk_50mhz 52 
+
+#buttons/switch
+#set_io btn1 122 
+#set_io btn2 124
+#set_io btn3 125
+#set_io btn4 128
+#set_io btn5 129
+#set_io btn6 130
+#set_io sw1 134
+
+#ArduinoHeader J1
+#set_io fpga_ino_sck 24
+#set_io fpga_ino_miso 25
+#set_io fpga_ino_sda 26
+#set_io fpga_ino_scl 28
+#set_io fpga_ino_mosi 29
+#set_io fpga_ino_ss 31
+#set_io fpga_ino_d9 32
+#set_io fpga_ino_d8 33
+
+#ArduinoHeader J4
+#set_io fpga_ino_d2 41
+#set_io fpga_ino_d3 42
+#set_io fpga_ino_d4 43
+#set_io fpga_ino_d5 44
+#set_io fpga_ino_d6 45
+#set_io fpga_ino_d7 47
+#set_io fpga_ino_tx 37
+#set_io fpga_ino_rx 38
+
+#adc
+#set_io adc_scl 120
+#set_io adc_sda 121
+
+#PMOD Header1
+#set_io p4_1 136
+#set_io p10_1 137
+#set_io p3_1 138
+#set_io p9_1 139
+#set_io p2_1 141
+#set_io p8_1 142
+#set_io p1_1 143
+#set_io p7_1 144
+
+#PMOD Header2
+#set_io p1_2 20
+#set_io p2_2 19
+#set_io p3_2 17
+#set_io p4_2 15
+#set_io p7_2 18
+#set_io p8_2 8
+#set_io p9_2 10
+#set_io p10_2 12
+
+#PMOD Header3
+#set_io p1_3 16
+#set_io p2_3 11
+#set_io p3_3 4
+#set_io p4_3 3
+#set_io p7_3 9
+#set_io p8_3 7
+#set_io p10_3 2
+#set_io p9_3 1
+
+#set_io dcd 49
+#set_io dtr 48
+#set_io dsr 55
+#set_io cts 56
+
+#set_io cdone 65
+#set_io creset_b 66
+
+#TXS0108EPW
+#set_io oe0 39
+#set_io oe1 34
+#MAX40200AUK
+#set_io pmod_pwr_en 22
+
+
+
+
+
+
