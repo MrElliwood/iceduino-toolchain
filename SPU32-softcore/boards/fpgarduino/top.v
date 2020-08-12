@@ -11,6 +11,7 @@
 `include "./ram/bram_wb8.v"
 `include "./ram/sram512kx8_wb8_vga.v"
 `include "./button/button_wb8.v"
+`include "./gpio/gpio_wb8.v"
 //`include "./switches/switches_wb8.v"
 
 module top(
@@ -25,6 +26,12 @@ module top(
         //SPI
         input spi_miso,
         output spi_clk, spi_mosi, spi_ss,
+
+        //GPIO Port 0
+        inout gpio0_pin0, gpio0_pin1, gpio0_pin2, gpio0_pin3, gpio0_pin4, gpio0_pin5, gpio0_pin6, gpio0_pin7,
+
+        //GPIO Port 1
+        inout gpio1_pin0, gpio1_pin1, gpio1_pin2, gpio1_pin3, gpio1_pin4, gpio1_pin5, gpio1_pin6, gpio1_pin7,
 
         //Buttons
         input btn0,btn1,btn2,btn3,btn4,
@@ -55,6 +62,14 @@ module top(
     assign oe1 = 1'b1;
 
 	
+    //wire clk;
+    //assign clk = clk_12mhz;
+    //localparam CLOCKFREQ = 12000000;
+
+    //wire clk;
+    //assign clk = clk_50mhz;
+    //localparam CLOCKFREQ = 50000000;
+
 	
     wire clk, clk_pll, pll_locked;
     // Instantiate PLL, 25.125 MHz
@@ -71,8 +86,7 @@ module top(
         .REFERENCECLK(clk_12mhz),				
         .PLLOUTCORE(clk)				
     );
-    //localparam CLOCKFREQ = 25125000;
-    localparam CLOCKFREQ = 50000000;
+    localparam CLOCKFREQ = 25125000;
 
 
 
@@ -118,6 +132,40 @@ module top(
 	    .I_wb_adr(cpu_adr[8:0]),
 	    .O_wb_dat(rom_dat),
 	    .O_wb_ack(rom_ack)
+    );
+
+	//GPIO Port 0
+    reg gpio0_stb = 0;
+    wire[7:0] gpio0_dat;
+    wire gpio0_ack;
+    wire[7:0] gpio0_port;
+
+    gpio_wb8 gpio0_inst(
+        .I_wb_clk(clk),
+        .I_wb_adr(cpu_adr[0]),
+        .I_wb_dat(cpu_dat),
+        .I_wb_stb(timer_stb),
+        .I_wb_we(cpu_we),
+        .O_wb_dat(gpio0_dat),
+        .O_wb_ack(gpio0_ack),
+        .GPIO_port(gpio0_port)
+    );
+
+	//GPIO Port 1
+    reg gpio1_stb = 0;
+    wire[7:0] gpio1_dat;
+    wire gpio1_ack;
+    wire[7:0] gpio1_port;
+
+    gpio_wb8 gpio1_inst(
+        .I_wb_clk(clk),
+        .I_wb_adr(cpu_adr[0]),
+        .I_wb_dat(cpu_dat),
+        .I_wb_stb(timer_stb),
+        .I_wb_we(cpu_we),
+        .O_wb_dat(gpio1_dat),
+        .O_wb_ack(gpio1_ack),
+        .GPIO_port(gpio1_port)
     );
 
 //Button
@@ -339,6 +387,20 @@ module top(
                 arbiter_dat_o = timer_dat;
                 arbiter_ack_o = timer_ack;
                 timer_stb = cpu_stb;
+            end
+
+			//GPIO Port 0
+            {28'hFFFFFE0,3'b0,1'b?}: begin // 0xFFFFFE00 - 0xFFFFFE01: GPIO Port 0
+                arbiter_dat_o = gpio0_dat;
+                arbiter_ack_o = gpio0_ack;
+                gpio0_stb = cpu_stb;
+            end
+
+			//GPIO Port 1
+            {28'hFFFFFE0,2'b0,1'b1,1'b?}: begin // 0xFFFFFE02 - 0xFFFFFE03: GPIO Port 1
+                arbiter_dat_o = gpio1_dat;
+                arbiter_ack_o = gpio1_ack;
+                gpio1_stb = cpu_stb;
             end
 
             {32'hFFFFFFE?}: begin // 0xFFFFFFEX Button

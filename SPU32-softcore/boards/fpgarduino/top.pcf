@@ -1,6 +1,7 @@
 
 #clk
 set_io clk_12mhz 21
+set_io clk_50mhz 52
 
 
 #Output level shifter tri-state pins
@@ -11,13 +12,13 @@ set_io oe1 34
 
 
 #uart to FTDI
-#set_io uart_rx 60
-#set_io uart_tx 62
+set_io uart_rx 60
+set_io uart_tx 62
 set_io uart_rt 61
 
 #uart to Header
-set_io uart_rx 32
-set_io uart_tx 33
+#set_io uart_rx 32
+#set_io uart_tx 33
 
 
 #spi
@@ -28,6 +29,26 @@ set_io spi_ss 71
 
 #Timer
 
+
+#GPIO Port 0
+set_io gpio0_pin0 38
+set_io gpio0_pin1 37
+set_io gpio0_pin2 41
+set_io gpio0_pin3 42
+set_io gpio0_pin4 43
+set_io gpio0_pin5 44
+set_io gpio0_pin6 45
+set_io gpio0_pin7 47
+
+#GPIO Port 1
+set_io gpio1_pin0 33
+set_io gpio1_pin1 32
+set_io gpio1_pin2 31
+set_io gpio1_pin3 29
+set_io gpio1_pin4 25
+set_io gpio1_pin5 24
+set_io gpio1_pin6 26
+set_io gpio1_pin7 28
 
 #Buttons
 set_io btn4 129
