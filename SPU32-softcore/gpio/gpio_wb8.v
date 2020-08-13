@@ -1,6 +1,6 @@
 module gpio_wb8(
         // Wishbone signals
-        input[1:0] I_wb_adr,
+        input I_wb_adr,
         input I_wb_clk,
         input[7:0] I_wb_dat,
         input I_wb_stb,
