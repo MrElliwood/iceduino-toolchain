@@ -6,20 +6,46 @@ set_io clk_50mhz 52
 
 #Output level shifter tri-state pins
 set_io oe0 39
-set_io oe1 34
+set_io oe1 31
 
 #SRAM
+set_io SRAM_A0 73
+set_io SRAM_A1 74
+set_io SRAM_A2 75
+set_io SRAM_A3 76
+set_io SRAM_A4 78
+set_io SRAM_A5 102
+set_io SRAM_A6 104
+set_io SRAM_A7 105
+set_io SRAM_A8 106
+set_io SRAM_A9 107
+set_io SRAM_A10 101
+set_io SRAM_A11 99
+set_io SRAM_A12 98
+set_io SRAM_A13 97
+set_io SRAM_A14 96
+set_io SRAM_A15 85
+set_io SRAM_A16 83
+set_io SRAM_A17 81
+set_io SRAM_A18 79
 
+set_io SRAM_IO0 80
+set_io SRAM_IO1 82
+set_io SRAM_IO2 84
+set_io SRAM_IO3 91
+set_io SRAM_IO4 95
+set_io SRAM_IO5 93
+set_io SRAM_IO6 90
+set_io SRAM_IO7 88
+
+set_io SRAM_WE 94
+set_io SRAM_OE 87
+set_io SRAM_CE 110
 
 #uart to FTDI
 set_io uart_rx 60
 set_io uart_tx 62
 set_io uart_rt 61
-
-#uart to Header
-#set_io uart_rx 32
-#set_io uart_tx 33
-
 
 #spi
 set_io spi_mosi 67
@@ -27,12 +53,9 @@ set_io spi_miso 68
 set_io spi_clk 70
 set_io spi_ss 71
 
-#Timer
-
-
 #GPIO Port 0
-set_io gpio0_pin0 38
-set_io gpio0_pin1 37
+set_io gpio0_pin0 37
+set_io gpio0_pin1 38
 set_io gpio0_pin2 41
 set_io gpio0_pin3 42
 set_io gpio0_pin4 43
@@ -41,14 +64,14 @@ set_io gpio0_pin6 45
 set_io gpio0_pin7 47
 
 #GPIO Port 1
-set_io gpio1_pin0 33
-set_io gpio1_pin1 32
-set_io gpio1_pin2 31
+set_io gpio1_pin0 32
+set_io gpio1_pin1 33
+set_io gpio1_pin2 34
 set_io gpio1_pin3 29
-set_io gpio1_pin4 25
-set_io gpio1_pin5 24
-set_io gpio1_pin6 26
-set_io gpio1_pin7 28
+set_io gpio1_pin4 26
+set_io gpio1_pin5 28
+set_io gpio1_pin6 25
+set_io gpio1_pin7 24
 
 #Buttons
 set_io btn4 129
