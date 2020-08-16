@@ -139,6 +139,8 @@ module top(
     wire[7:0] gpio0_dat;
     wire gpio0_ack;
     wire[7:0] gpio0_port;
+	
+	assign gpio0_port = {gpio0_pin0, gpio0_pin1, gpio0_pin2, gpio0_pin3, gpio0_pin4, gpio0_pin5, gpio0_pin6, gpio0_pin7};
 
     gpio_wb8 gpio0_inst(
         .I_wb_clk(clk),
@@ -146,6 +148,7 @@ module top(
         .I_wb_dat(cpu_dat),
         .I_wb_stb(gpio0_stb),
         .I_wb_we(cpu_we),
+        .I_reset(reset),
         .O_wb_dat(gpio0_dat),
         .O_wb_ack(gpio0_ack),
         .GPIO_port(gpio0_port)
@@ -156,13 +159,16 @@ module top(
     wire[7:0] gpio1_dat;
     wire gpio1_ack;
     wire[7:0] gpio1_port;
-
+	
+	assign gpio1_port = {gpio1_pin0, gpio1_pin1, gpio1_pin2, gpio1_pin3, gpio1_pin4, gpio1_pin5, gpio1_pin6, gpio1_pin7};
+	
     gpio_wb8 gpio1_inst(
         .I_wb_clk(clk),
         .I_wb_adr(cpu_adr[0]),
         .I_wb_dat(cpu_dat),
         .I_wb_stb(gpio1_stb),
         .I_wb_we(cpu_we),
+        .I_reset(reset),
         .O_wb_dat(gpio1_dat),
         .O_wb_ack(gpio1_ack),
         .GPIO_port(gpio1_port)
@@ -355,6 +361,9 @@ module top(
 		timer_stb = 0;
 		leds_stb = 0; 
         ram_stb = 0;
+		gpio0_stb = 0;
+		gpio1_stb = 0;
+		
 
         button0_stb = 0;
 
