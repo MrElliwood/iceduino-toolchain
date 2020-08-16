@@ -1,0 +1,42 @@
+
+switch.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	0140006f          	j	14 <_init>
+	...
+
+00000010 <_interrupt>:
+  10:	0000006f          	j	10 <_interrupt>
+
+00000014 <_init>:
+  14:	00080137          	lui	sp,0x80
+  18:	008000ef          	jal	ra,20 <main>
+  1c:	fe5ff06f          	j	0 <_start>
+
+Disassembly of section .text.startup:
+
+00000020 <main>:
+  20:	fe804783          	lbu	a5,-24(zero) # ffffffe8 <//.+0xfff7ffe8>
+  24:	fe804783          	lbu	a5,-24(zero) # ffffffe8 <//.+0xfff7ffe8>
+  28:	ff000693          	li	a3,-16
+  2c:	fff00613          	li	a2,-1
+  30:	00f00593          	li	a1,15
+  34:	fe804703          	lbu	a4,-24(zero) # ffffffe8 <//.+0xfff7ffe8>
+  38:	fe804783          	lbu	a5,-24(zero) # ffffffe8 <//.+0xfff7ffe8>
+  3c:	00177713          	andi	a4,a4,1
+  40:	0017d793          	srli	a5,a5,0x1
+  44:	0017f793          	andi	a5,a5,1
+  48:	02070063          	beqz	a4,68 <main+0x48>
+  4c:	00079663          	bnez	a5,58 <main+0x38>
+  50:	feb00823          	sb	a1,-16(zero) # fffffff0 <//.+0xfff7fff0>
+  54:	fe1ff06f          	j	34 <main+0x14>
+  58:	fec00823          	sb	a2,-16(zero) # fffffff0 <//.+0xfff7fff0>
+  5c:	fd9ff06f          	j	34 <main+0x14>
+  60:	fe000823          	sb	zero,-16(zero) # fffffff0 <//.+0xfff7fff0>
+  64:	fd1ff06f          	j	34 <main+0x14>
+  68:	fe078ce3          	beqz	a5,60 <main+0x40>
+  6c:	fed00823          	sb	a3,-16(zero) # fffffff0 <//.+0xfff7fff0>
+  70:	fc5ff06f          	j	34 <main+0x14>

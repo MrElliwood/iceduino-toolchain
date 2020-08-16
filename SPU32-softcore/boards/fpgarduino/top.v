@@ -12,7 +12,7 @@
 `include "./ram/sram512kx8_wb8_vga.v"
 `include "./button/button_wb8.v"
 `include "./gpio/gpio_wb8.v"
-//`include "./switches/switches_wb8.v"
+`include "./switches/switches_wb8.v"
 
 module top(
 		
@@ -35,9 +35,10 @@ module top(
 
         //Buttons
         input btn0,btn1,btn2,btn3,btn4,
+		
 
         //Switches
-        //input sw0, sw1,
+        input sw0, sw1,
 		
         //LEDs
         output led0, led1, led2, led3, led4, led5, led6, led7,
@@ -189,6 +190,22 @@ module top(
         .I_button(btn)
     );
     assign {btn0,btn1,btn2,btn3,btn4} = btn;
+	
+	//Switches
+    reg switch_stb;
+    wire[7:0] switch_dat;
+    wire[1:0] sw;
+    wire button0_ack;
+
+    button_wb8 button0_inst(
+        .I_wb_clk(clk),       
+        .I_wb_stb(switch_stb),
+        .I_wb_we(cpu_we),    
+        .O_wb_dat(switch_dat),
+        .O_wb_ack(switch_ack),
+        .I_switches(sw)
+    );
+    assign {sw0,sw1} = sw;
 	
 	
 	
@@ -363,8 +380,7 @@ module top(
         ram_stb = 0;
 		gpio0_stb = 0;
 		gpio1_stb = 0;
-		
-
+		switch_stb = 0;
         button0_stb = 0;
 
         casez(cpu_adr[31:0])
@@ -413,10 +429,16 @@ module top(
             end
 
             {32'hFFFFFFE?}: begin // 0xFFFFFFEX Button
-		arbiter_dat_o = button0_dat;
-		arbiter_ack_o = button0_ack;
-		button0_stb = cpu_stb;                      
+				arbiter_dat_o = button0_dat;
+				arbiter_ack_o = button0_ack;
+				button0_stb = cpu_stb;                      
             end
+			
+			{28'hFFFFFFE,1'b1,2'b0,1'b?}: begin // 0xFFFFFFE8-0xFFFFFFE9 Switches
+				arbiter_dat_o = switch_dat;
+				arbiter_ack_o = switch_ack;
+				switch_stb = cpu_stb;                      
+			end
 
 			//LEDs
             {32'hFFFFFFF?}: begin // 0xFFFFFFFx LEDs
