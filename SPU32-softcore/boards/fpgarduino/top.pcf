@@ -82,8 +82,8 @@ set_io btn0 122
 
 
 #Switches
-#set_io sw0 130
-#set_io sw1 134
+set_io sw0 130
+set_io sw1 134
 
 
 #leds

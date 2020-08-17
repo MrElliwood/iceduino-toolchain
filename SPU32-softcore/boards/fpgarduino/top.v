@@ -35,7 +35,6 @@ module top(
 
         //Buttons
         input btn0,btn1,btn2,btn3,btn4,
-		
 
         //Switches
         input sw0, sw1,
@@ -126,7 +125,7 @@ module top(
     wire[7:0] rom_dat;
 
     rom_wb8 #(
-        .ROMINITFILE("./software/asm/button_all.dat")
+        .ROMINITFILE("./software/asm/switch.dat")
     ) rom_inst (
 	    .I_wb_clk(clk),
 	    .I_wb_stb(rom_stb),
@@ -190,14 +189,15 @@ module top(
         .I_button(btn)
     );
     assign {btn0,btn1,btn2,btn3,btn4} = btn;
-	
+
+
 	//Switches
     reg switch_stb;
     wire[7:0] switch_dat;
     wire[1:0] sw;
-    wire button0_ack;
+    wire switch_ack;
 
-    button_wb8 button0_inst(
+    switches_wb8 switches_inst(
         .I_wb_clk(clk),       
         .I_wb_stb(switch_stb),
         .I_wb_we(cpu_we),    
@@ -206,8 +206,7 @@ module top(
         .I_switches(sw)
     );
     assign {sw0,sw1} = sw;
-	
-	
+
 	
 	//LEDs
     reg leds_stb;
@@ -428,20 +427,20 @@ module top(
                 gpio1_stb = cpu_stb;
             end
 
-            {32'hFFFFFFE?}: begin // 0xFFFFFFEX Button
+            {32'hFFFFFFE0}: begin // 0xFFFFFFE0 Buttons
 				arbiter_dat_o = button0_dat;
 				arbiter_ack_o = button0_ack;
 				button0_stb = cpu_stb;                      
             end
 			
-			{28'hFFFFFFE,1'b1,2'b0,1'b?}: begin // 0xFFFFFFE8-0xFFFFFFE9 Switches
+			{32'hFFFFFFE1}: begin // 0xFFFFFFE1 Switches
 				arbiter_dat_o = switch_dat;
 				arbiter_ack_o = switch_ack;
 				switch_stb = cpu_stb;                      
 			end
 
 			//LEDs
-            {32'hFFFFFFF?}: begin // 0xFFFFFFFx LEDs
+            {32'hFFFFFFE2}: begin // 0xFFFFFFE2 LEDs
                 arbiter_dat_o = leds_dat;
                 arbiter_ack_o = leds_ack;
                 leds_stb = cpu_stb;                      
