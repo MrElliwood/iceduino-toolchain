@@ -19,8 +19,14 @@ Disassembly of section .text:
 Disassembly of section .text.startup:
 
 00000020 <main>:
-  20:	fe004783          	lbu	a5,-32(zero) # ffffffe0 <//.+0xfff7ffe0>
-  24:	fe004783          	lbu	a5,-32(zero) # ffffffe0 <//.+0xfff7ffe0>
-  28:	0ff7f793          	andi	a5,a5,255
-  2c:	fef00823          	sb	a5,-16(zero) # fffffff0 <//.+0xfff7fff0>
-  30:	ff5ff06f          	j	24 <main+0x4>
+  20:	fff00793          	li	a5,-1
+  24:	e0f000a3          	sb	a5,-511(zero) # fffffe01 <//.+0xfff7fe01>
+  28:	e0f001a3          	sb	a5,-509(zero) # fffffe03 <//.+0xfff7fe03>
+  2c:	fe004783          	lbu	a5,-32(zero) # ffffffe0 <//.+0xfff7ffe0>
+  30:	0ff7f793          	andi	a5,a5,255
+  34:	fef00123          	sb	a5,-30(zero) # ffffffe2 <//.+0xfff7ffe2>
+  38:	e0f00023          	sb	a5,-512(zero) # fffffe00 <//.+0xfff7fe00>
+  3c:	fff7c793          	not	a5,a5
+  40:	0ff7f793          	andi	a5,a5,255
+  44:	e0f00123          	sb	a5,-510(zero) # fffffe02 <//.+0xfff7fe02>
+  48:	fe5ff06f          	j	2c <main+0xc>

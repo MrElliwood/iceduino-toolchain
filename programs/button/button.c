@@ -1,6 +1,11 @@
 /* 
 Von 8 Bit Daten sind 5 Bit für die 5 Buttons bzw. 5 Leds
 Wird ein Button gedrückt, leuchtet die jeweilige Led
+*/
+
+#include <stdint.h>
+#include <stdbool.h>
+
 #define reg_leds (*(volatile uint8_t*)0xFFFFFFE2)	
 #define reg_button (*(volatile uint8_t*)0xFFFFFFE0)
 #define reg_gpio0_dir (*(volatile uint8_t*)0xFFFFFE01)
@@ -10,6 +15,8 @@ Wird ein Button gedrückt, leuchtet die jeweilige Led
 
 
 void main() {
+	
+	uint8_t btn0;
 	
 	reg_gpio0_dir = (uint8_t)0b11111111;
 	reg_gpio1_dir = (uint8_t)0b11111111;
